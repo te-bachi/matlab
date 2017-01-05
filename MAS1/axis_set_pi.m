@@ -1,5 +1,5 @@
 
-function axis_set(title)
+function axis_set_pi(title)
     set(gca,'FontSize',14);
     set(gca, 'xtick', [
         -4/4*pi
@@ -13,7 +13,7 @@ function axis_set(title)
         4/4*pi
     ]);
     set(gca, 'xticklabels', ({
-        '$$\fontsize{12}{0}-\pi$$'
+        '$$-\pi$$'
         '$$-\frac{3}{4}\pi$$'
         '$$-\frac{2}{4}\pi$$'
         '$$-\frac{1}{4}\pi$$'

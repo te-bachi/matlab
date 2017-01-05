@@ -3,7 +3,7 @@ close all;
 clc;
 clear;
 
-t   = linspace(-pi, pi, 1000);
+t   = linspace(-2*pi, 2*pi, 1000);
 
 set(groot, 'defaultAxesTickLabelInterpreter',   'latex');
 set(groot, 'defaultLegendInterpreter',          'latex');
@@ -21,7 +21,8 @@ plot(t, y3, 'Color', 'green', 'LineStyle', '--');
 hold on;
 plot(t, y2, 'Color', 'blue', 'LineStyle', '--');
 plot(t, y1, 'Color', 'red', 'LineStyle', '-');
-axis_set('sin \left ( 2 t \right ) \cdot cos \left ( 1  t \right )');
+axis_set_2pi();
+legend('$$cos\left(1t\right)$$', '$$sin\left(2t\right)$$', '$sin \left ( 2 t \right ) \cdot cos \left ( 1  t \right )$');
 
 % f2
 f2  = @(t) sin(2.*t) .* cos(2.*t);
@@ -29,7 +30,8 @@ y2  = f2(t);
 figure;
 plot(t, y2, 'Color', 'green', 'LineStyle', '-');
 grid on;
-axis_set('');
+axis_set_2pi();
+legend('$sin \left ( 2 t \right ) \cdot cos \left ( 2  t \right )$');
 
 % f3
 f3  = @(t) sin(2.*t) .* cos(3.*t);
@@ -37,7 +39,8 @@ y3  = f3(t);
 figure;
 plot(t, y3, 'Color', 'black', 'LineStyle', '--');
 grid on;
-axis_set('');
+axis_set_2pi();
+legend('$sin \left ( 2 t \right ) \cdot cos \left ( 3  t \right )$');
 
 % f4
 f4  = @(t) sin(2.*t) .* cos(4.*t);
@@ -45,4 +48,5 @@ y4  = f4(t);
 figure;
 plot(t, y4, 'Color', [0.6 0.4 0.2], 'LineStyle', '-');
 grid on;
-axis_set('');
+axis_set_2pi();
+legend('$sin \left ( 2 t \right ) \cdot cos \left ( 4  t \right )$');
