@@ -7,7 +7,7 @@ t   = linspace(-pi, pi, 1000);
 
 set(groot, 'defaultAxesTickLabelInterpreter',   'latex');
 set(groot, 'defaultLegendInterpreter',          'latex');
-%set(groot, 'defaultTextInterpreter',            'latex');
+set(groot, 'defaultTextInterpreter',            'latex');
 
 % f1
 figure;

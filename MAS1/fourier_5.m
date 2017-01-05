@@ -7,7 +7,7 @@ t   = linspace(-pi, pi, 1000);
 
 set(groot, 'defaultAxesTickLabelInterpreter',   'latex');
 set(groot, 'defaultLegendInterpreter',          'latex');
-%set(groot, 'defaultTextInterpreter',            'latex');
+set(groot, 'defaultTextInterpreter',            'latex');
 
 % f1
 figure;
@@ -17,9 +17,9 @@ f3  = @(t) cos(1.*t);
 y1  = f1(t);
 y2  = f2(t);
 y3  = f3(t);
-plot(t, y3, 'Color', [0.4 0.8 0.8], 'LineStyle', '--');
+plot(t, y3, 'Color', 'green', 'LineStyle', '--');
 hold on;
-plot(t, y2, 'Color', [0.8 0.4 0.8], 'LineStyle', '--');
+plot(t, y2, 'Color', 'blue', 'LineStyle', '--');
 plot(t, y1, 'Color', 'red', 'LineStyle', '-');
 axis_set('sin \left ( 2 t \right ) \cdot cos \left ( 1  t \right )');
 
