@@ -1,5 +1,5 @@
 
-function axis_set_pi(title)
+function axis_set_pi()
     set(gca,'FontSize',14);
     set(gca, 'xtick', [
         -4/4*pi
@@ -39,8 +39,7 @@ function axis_set_pi(title)
     ylim([-1, 1]);
     line([0 0], ylim, 'Color', 'black', 'LineWidth', 1.5);
     line(xlim, [0 0], 'Color', 'black', 'LineWidth', 1.5);
-    %xlabel('$f \left \( t \right \)$', 'Interpreter', 'latex');
     xlabel('$t$');
-    ylabel(['$f \left ( t \right ) =', title, '$']);
+    ylabel(['$f \left ( t \right )$']);
     
 end
