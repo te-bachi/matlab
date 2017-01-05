@@ -1,5 +1,11 @@
 
-function axis_set_pi()
+function axis_set_pi(has_labels)
+
+    if nargin < 1
+        has_labels = true;
+    end
+    
+    set(gcf, 'Color', 'white');
     set(gca,'FontSize',14);
     set(gca, 'xtick', [
         -4/4*pi
@@ -37,9 +43,11 @@ function axis_set_pi()
     grid on;
     xlim([-pi, pi]);
     ylim([-1, 1]);
-    line([0 0], ylim, 'Color', 'black', 'LineWidth', 1.5);
-    line(xlim, [0 0], 'Color', 'black', 'LineWidth', 1.5);
-    xlabel('$t$');
-    ylabel(['$f \left ( t \right )$']);
+    line([0.01 0.01], ylim, 'Color', 'black', 'LineWidth', 0.8);
+    line(xlim, [0.01 0.01], 'Color', 'black', 'LineWidth', 0.8);
     
+    if has_labels
+        xlabel('$t$');
+        ylabel(['$f \left ( t \right )$']);
+    end
 end

@@ -9,6 +9,16 @@ set(groot, 'defaultAxesTickLabelInterpreter',   'latex');
 set(groot, 'defaultLegendInterpreter',          'latex');
 set(groot, 'defaultTextInterpreter',            'latex');
 
+% f0
+f0  = @(t) cos(0.*t);
+y0  = f0(t);
+figure;
+plot(t, y0, 'Color', [0.2 0.6 0.4], 'LineStyle', '-');
+grid on;
+axis_set_pi();
+legend('$cos \left ( 0  t \right ) = cos \left ( 0  \right ) = 1$');
+fprintf('int(f0) = %f\n', integral(f0, -pi, pi));
+
 % f1
 figure;
 f1  = @(t) cos(2.*t) .* cos(1.*t);

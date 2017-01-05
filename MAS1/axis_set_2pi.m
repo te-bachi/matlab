@@ -37,8 +37,8 @@ function axis_set_2pi()
     grid on;
     xlim([-2*pi, 2*pi]);
     ylim([-1, 1]);
-    line([0 0], ylim, 'Color', 'black', 'LineWidth', 1.5);
-    line(xlim, [0 0], 'Color', 'black', 'LineWidth', 1.5);
+    line([0.01 0.01], ylim, 'Color', 'black', 'LineWidth', 0.8);
+    line(xlim, [0.01 0.01], 'Color', 'black', 'LineWidth', 0.8);
     %xlabel('$f \left \( t \right \)$', 'Interpreter', 'latex');
     xlabel('$t$');
     ylabel('$f \left ( t \right )$');
