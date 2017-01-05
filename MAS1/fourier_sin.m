@@ -20,7 +20,7 @@ for l = 0:(subplot_m * subplot_n) - 1
     f  = @(t) sin(l.*t);
     y  = f(t);
     subplot(subplot_m, subplot_n, l + 1);
-    plot(t, y);
+    plot(t, y, 'LineWidth', 1.5);
     grid on;
     axis_set_pi(false);
     legend(['$\mathrm{', f1, '} \left ( ', num2str(l), '  t \right )$']);
