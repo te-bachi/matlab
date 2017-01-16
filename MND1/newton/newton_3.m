@@ -13,7 +13,9 @@ x0 = 0;
 n  = 3;
 
 % Funktionen
+% Funktion f(x) = 0
 f  = @(x) 1.5.*x.^3 - x + 0.3;
+% Ableitung df/dx (x)
 df = @(x) 4.5.*x.^2 - 1;
 
 
