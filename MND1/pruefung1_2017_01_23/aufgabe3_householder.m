@@ -2,12 +2,18 @@
 clear;
 clc;
 
-% dim(A) = 8x5
+% dim(A) = 3x3
 A                       = [  1,  0,  0 ;
                              1,  0,  1 ;
                              0,  1,  0 ];
 
+% dim(b) = 3x1
+b                       = [  1;
+                             2;
+                             1];
+
 printmat('A', A);
+printmat('b', b);
 
 % Grösse der Matrix A bestimmen
 [rows, cols]            = size(A);
@@ -63,8 +69,8 @@ for i = 1:cols
     printmat('y', y);
     printmat('d', d(i,1));
     printmat('w', w);
-    printmat('Qi', Qi(:,:,i));
-    printmat('Ai', Ai(:,:,i+1));
+    printmat(sprintf('Q%d', i), Qi(:,:,i));
+    printmat(sprintf('A%d', i), Ai(:,:,i+1));
     printmat('Qt', Qt);
 end
 
@@ -86,3 +92,6 @@ printmat('R', R);
 
 printmat('A', Q*R);
 
+x = lr_backward(R,Qt*b);
+
+printmat('x', x);
