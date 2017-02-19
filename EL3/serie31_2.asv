@@ -1,0 +1,26 @@
+
+clear all;
+close all;
+clc;
+
+%   ____
+% --____---.-----.
+%          |     |
+%           >   | |
+%           >   | |
+%           >   | |
+%          |     |
+% ---------.-----.
+
+f   = 50;
+w   = 2*pi*f;
+U   = 100;
+L   = 100e-3;
+R1  = 10;
+R2  = 20;
+
+ZLcomp = 1i*w*L;
+ZPcomp = (ZLcomp * R2) / (ZLcomp + R2);
+ZGcomp = R1 + ZPcomp;
+I1comp = U / ZGcomp;
+U2comp = U - (R1 * I1comp);

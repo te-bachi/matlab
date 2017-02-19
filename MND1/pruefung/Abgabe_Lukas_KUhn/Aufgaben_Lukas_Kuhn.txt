@@ -1,0 +1,62 @@
+Aufgabe1
+Berechnungen Siehe Blatt
+u =
+         0
+    0.0898
+    0.1603
+    0.2121
+    0.2451
+    0.2589
+    0.2529
+    0.2257
+    0.1759
+    0.1015
+         0
+Aufgabe 2
+Berechnung siehe Blatt
+
+Aufgabe3
+
+Berechnung siehe Blatt
+
+Aufgabe4
+Die Lösungen wurdem mit dem Newtonverfahren gelöst
+Die Startwerte wurden mit den nspire ausgerechnet
+Mit dem Startwert [1.5,0.5]
+Wurde mit dem einfachen Newtonverfahren berechnet
+  x=   1.4683
+    1.0896
+Mit dem Startwert [1.5,-0.1]
+xneu =
+    1.4683
+   -0.0896
+Mit dem Startwert [-0.5,0.2]
+xneu =
+   -0.4978
+    0.1924
+Mit dem Startwert[-0.5,0.8]
+ x=  -0.4978
+    0.8076
+Aufgabe 5
+Laenge =
+   -6.2827 in x
+   -5.7470 in y
+  -12.4216 in z
+
+Aufgabe8 
+a) Siehe Blatt
+c) 
+Die Matrix A wurde zusammengepastelt.....
+
+    0.0005=a
+    0.0001=h
+    0.0003=b
+   -0.0166=g
+   -0.0132=f
+
+b) Die Gleichung lautet
+was die Variablen bedeutet siehe Matlab 
+b=y2;
+	q*r=b
+	r=q'*b
+x=backward(r,q'*b)
