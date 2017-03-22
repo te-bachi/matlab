@@ -1,4 +1,0 @@
-function [color] = orange()
-    color = e;
-end
-
