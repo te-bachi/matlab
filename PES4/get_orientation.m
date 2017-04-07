@@ -1,16 +1,32 @@
 
+clear all;
+close all;
+clc;
+
+port = 'COM3';
+
+
 try
-    s = serial('COM10', 'BaudRate', 115200);
+    s = instrfind('Port', port);
+    if (strcmp(strjoin(s.Status), 'open') == 0)
+        disp('Close opened connection...');
+        fclose(s);
+    end
+    
+    disp('Try to open serial...');
+    s = serial(port, 'BaudRate', 115200);
+    
     fopen(s);
+    disp('Succeeded!');
 
     figure(1);
     counter = 1;
 
     while 1
-    % time, ax,ay,az, q0,q1,q2,q3 -> Ausgabe im Arduino Script
-        rxBuf = fscanf(s, '%d, %f, %f, %f, %f, %f, %f, %f\n');
-        a = rxBuf(2:4)';
-        q = rxBuf(5:8)';
+        % ax,ay,az, q0,q1,q2,q3 -> Ausgabe im Arduino Script
+        rxBuf = fscanf(s, '%f, %f, %f, %f, %f, %f, %f\n');
+        a = rxBuf(1:3)';
+        q = rxBuf(4:7)';
         %disp(a);
         %disp(q);
 
@@ -48,7 +64,7 @@ try
             drawnow;
         end
         counter = counter + 1;
-        disp(counter);
+        %disp(counter);
 
 
         key = get(gcf, 'CurrentKey');
@@ -57,7 +73,17 @@ try
         end
     end
     fclose(s);
-catch
-    fclose(s);
+catch ME
+    switch ME.identifier
+        case 'MATLAB:serial:fopen:opfailed'
+            disp('Cannot open serial!');
+            fclose(s);
+            rethrow(ME);
+            
+        otherwise
+            disp(ME.identifier);
+            
+            rethrow(ME);
+    end
 end
-
+    
