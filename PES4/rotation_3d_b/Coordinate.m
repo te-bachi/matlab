@@ -34,7 +34,7 @@ classdef Coordinate < handle
                  0,     0,     0,     1; % z
                  0,     0,     0,     0; % h
             ];
-            obj.coord = obj.origin
+            obj.coord = obj.origin;
         end
         
         function transform(obj, trans, rot)
@@ -81,7 +81,7 @@ classdef Coordinate < handle
         end
         
         function delete(obj)
-            reset(obj)
+            reset(obj);
         end
     end
 end

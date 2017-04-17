@@ -182,7 +182,7 @@ classdef Robot < handle
             
             %--------------------------------------------------------------
             % Koordinatensystem transformieren
-%            obj.c1.transform(obj.T_0_1);
+            obj.c1.transform([0; 0; 0; 0], obj.T_0_1);
             obj.c2.transform(obj.B1(:,2), obj.T_0_1 * obj.T_1_2);
             obj.c3.transform(obj.B2(:,2), obj.T_0_1 * obj.T_1_2 * obj.T_2_3);
             obj.c4.transform(obj.B3(:,2), obj.T_0_1 * obj.T_1_2 * obj.T_2_3 * obj.T_3_4);
@@ -210,7 +210,7 @@ classdef Robot < handle
         end
         
         function plotCoordinates(obj)
-            obj.c0.plot();
+            obj.c0.plot('s');
             obj.c1.plot();
             obj.c2.plot();
             obj.c3.plot();
