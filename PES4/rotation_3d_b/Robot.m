@@ -25,6 +25,11 @@ classdef Robot < handle
         p1
         p2
         p3
+        c0
+        c1
+        c2
+        c3
+        c4
         h_arm_1
         h_arm_2
         h_arm_3
@@ -57,6 +62,14 @@ classdef Robot < handle
                 0;      % z
                 1;      % homogen (nur zum rechnen)
             ];
+            
+            %--------------------------------------------------------------
+            % Koordinatensystem
+            obj.c0 = Coordinate();
+            obj.c1 = Coordinate();
+            obj.c2 = Coordinate();
+            obj.c3 = Coordinate();
+            obj.c4 = Coordinate();
 
             %--------------------------------------------------------------
             % Roboter Arme
@@ -166,6 +179,14 @@ classdef Robot < handle
             obj.p1 = obj.T_0_1 * obj.T_1_2                          * obj.origin;
             obj.p2 = obj.T_0_1 * obj.T_1_2 * obj.T_2_3              * obj.origin;
             obj.p3 = obj.T_0_1 * obj.T_1_2 * obj.T_2_3 * obj.T_3_4  * obj.origin;
+            
+            %--------------------------------------------------------------
+            % Koordinatensystem transformieren
+%            obj.c1.transform(obj.T_0_1);
+            obj.c2.transform(obj.B1(:,2), obj.T_0_1 * obj.T_1_2);
+            obj.c3.transform(obj.B2(:,2), obj.T_0_1 * obj.T_1_2 * obj.T_2_3);
+            obj.c4.transform(obj.B3(:,2), obj.T_0_1 * obj.T_1_2 * obj.T_2_3 * obj.T_3_4);
+            
         end
         
         function plotArms(obj)
@@ -186,6 +207,14 @@ classdef Robot < handle
             obj.h_point_2 = scatter3(obj.p1(1), obj.p1(2), obj.p1(3), 'MarkerEdgeColor', 'blue');
             obj.h_point_3 = scatter3(obj.p2(1), obj.p2(2), obj.p2(3), 'MarkerEdgeColor', 'blue');
             obj.h_point_4 = scatter3(obj.p3(1), obj.p3(2), obj.p3(3), 'MarkerEdgeColor', 'red');
+        end
+        
+        function plotCoordinates(obj)
+            obj.c0.plot();
+            obj.c1.plot();
+            obj.c2.plot();
+            obj.c3.plot();
+            obj.c4.plot();
         end
         
         function reset(obj)

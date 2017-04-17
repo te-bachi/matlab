@@ -54,6 +54,7 @@ classdef MainFigure < handle
             obj.RobotInst.transform();
             obj.RobotInst.plotArms();
             obj.RobotInst.plotPoints();
+            obj.RobotInst.plotCoordinates();
         end
         
         function TimerEvent(obj, src, event)

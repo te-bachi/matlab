@@ -9,7 +9,7 @@
 %           Null         y-Koordinate
 %
 
-classdef Coordinate
+classdef Coordinate < handle
     
     properties (Constant)
         WIDTH_NORMAL = 2.0
@@ -34,10 +34,11 @@ classdef Coordinate
                  0,     0,     0,     1; % z
                  0,     0,     0,     0; % h
             ];
+            obj.coord = obj.origin
         end
         
-        function rotate(obj, matrix)
-            obj.coord = matrix * obj.origin;
+        function transform(obj, trans, rot)
+            obj.coord = [trans, trans, trans, trans] + rot * obj.origin;
         end
         
         function plot(obj, style)
