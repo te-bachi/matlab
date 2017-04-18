@@ -4,7 +4,7 @@ close all;
 clc;
 clear classes;
 
-try
+try     
     fig = MainFigure();
     fig.update();
 catch ME

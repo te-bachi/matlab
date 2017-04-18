@@ -199,7 +199,7 @@ classdef Robot < handle
             obj.p1 = T02 * obj.origin;
             obj.p2 = T03 * obj.origin;
             obj.p3 = T04 * obj.origin;
-            
+
             %--------------------------------------------------------------
             % Koordinatensystem transformieren
             obj.c1.transform(obj.origin,  T01);

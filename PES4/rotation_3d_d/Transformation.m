@@ -15,12 +15,14 @@ classdef Transformation < handle
             elseif nargin == 2
                 t               = varargin{1};
                 q               = varargin{2};
+                obj.m(1:3,4)    = t;
                 obj.m(1:3,1:3)  = quat2rotm(q);
             elseif nargin == 4
                 t               = varargin{1};
                 roll            = varargin{2};
                 pitch           = varargin{3};
                 yaw             = varargin{4};
+                obj.m(1:3,4)    = t;
                 obj.m(1:3,1:3)  = angle2dcm(yaw, pitch, roll);
             else
                 %
