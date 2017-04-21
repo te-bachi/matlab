@@ -9,15 +9,18 @@ classdef MainFigure < handle
         StartDelayTimer
         UpdateTimer
         RobotInst
-        Serial
-        QuatOrigin
+        SerialUpper
+        SerialLower
+        QuatOriginUpper
+        QuatOriginLower
     end
     
     methods
         function obj = MainFigure()
             
             %--------------------------------------------------------------
-            obj.Serial      = SerialPort();
+            obj.SerialUpper = SerialPort('COM7');
+            obj.SerialLower = SerialPort('COM3');
             
             %--------------------------------------------------------------
             obj.Figure = figure();
@@ -61,10 +64,15 @@ classdef MainFigure < handle
         
             function StartDelayTimerFcn(src, event, obj)
                 disp('StartDelayTimerFcn');
-                obj.QuatOrigin  = obj.Serial.read();
-                disp('obj.QuatOrigin = ');
-                disp(obj.QuatOrigin);
-                obj.QuatOrigin  = quatinv(obj.QuatOrigin);
+                obj.QuatOriginUpper  = obj.SerialUpper.read();
+                obj.QuatOriginLower  = obj.SerialLower.read();
+                disp('obj.QuatOriginUpper = ');
+                disp(obj.QuatOriginUpper);
+                disp('obj.QuatOriginLower = ');
+                disp(obj.QuatOriginLower);
+                
+                obj.QuatOriginUpper  = quatinv(obj.QuatOriginUpper);
+                obj.QuatOriginLower  = quatinv(obj.QuatOriginLower);
                 
             end
             function UpdateTimerFcn(src, event, obj)
@@ -73,9 +81,11 @@ classdef MainFigure < handle
         end
         
         function update(obj)
-            q = obj.Serial.read();
-            qdiff = q .* obj.QuatOrigin;
-            obj.RobotInst.transform(qdiff);
+            qUpper = obj.SerialUpper.read();
+            qUpperDiff = quatmultiply(qUpper, obj.QuatOriginUpper);
+            qLower = obj.SerialLower.read();
+            qLowerDiff = quatmultiply(qLower, obj.QuatOriginLower);
+            obj.RobotInst.transform(qUpperDiff, qLowerDiff);
             obj.RobotInst.plotArms();
             obj.RobotInst.plotPoints();
             obj.RobotInst.plotCoordinates();
@@ -101,7 +111,8 @@ classdef MainFigure < handle
             delete(obj.UpdateTimer);
             delete(obj.Figure);
             delete(obj.RobotInst);
-            delete(obj.Serial);
+            delete(obj.SerialUpper);
+            delete(obj.SerialLower);
         end
     end
     
