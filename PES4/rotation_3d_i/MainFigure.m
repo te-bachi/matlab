@@ -1,6 +1,6 @@
 classdef MainFigure < handle
     properties (Constant)
-        TIMER_DELAY  = 1.0
+        TIMER_DELAY  = 2.0
         TIMER_PERIOD = 0.1
     end
     
@@ -9,18 +9,19 @@ classdef MainFigure < handle
         StartDelayTimer
         UpdateTimer
         RobotInst
-        SerialUpper
-        SerialLower
+        Serial
         QuatOriginUpper
         QuatOriginLower
+        
+        timeStart
+        fp
     end
     
     methods
         function obj = MainFigure()
             
             %--------------------------------------------------------------
-            obj.SerialUpper = SerialPort('COM7');
-            obj.SerialLower = SerialPort('COM3');
+            obj.Serial = SerialPort();
             
             %--------------------------------------------------------------
             obj.Figure = figure();
@@ -39,6 +40,18 @@ classdef MainFigure < handle
             set(gca,'CameraViewAngle',10);
             set(gca,'CameraPosition', [60.0, 60.0, 35.0]);
             set(gca,'DataAspectRatio',[1 1 1]);
+            
+            %--------------------------------------------------------------
+            % Open file
+            t             = datetime('now');
+            obj.timeStart = posixtime(t) * 1000;
+            date_str      = datestr(t, 'yyyy_MM_dd_HH_mm_ss');
+            filename      = [ 'q_' date_str '.txt' ];
+            obj.fp        = fopen(filename, 'w');
+            if obj.fp == -1
+                throw(MException('MainFigure', ...
+                                 'Can not create file %s', filename));
+            end
             
             %--------------------------------------------------------------
             obj.RobotInst = Robot();
@@ -64,8 +77,7 @@ classdef MainFigure < handle
         
             function StartDelayTimerFcn(src, event, obj)
                 disp('StartDelayTimerFcn');
-                obj.QuatOriginUpper  = obj.SerialUpper.read();
-                obj.QuatOriginLower  = obj.SerialLower.read();
+                [obj.QuatOriginLower, obj.QuatOriginUpper] = obj.Serial.read();
                 disp('obj.QuatOriginUpper = ');
                 disp(obj.QuatOriginUpper);
                 disp('obj.QuatOriginLower = ');
@@ -81,14 +93,28 @@ classdef MainFigure < handle
         end
         
         function update(obj)
-            qUpper = obj.SerialUpper.read();
+            [qLower, qUpper] = obj.Serial.read();
             qUpperDiff = quatmultiply(qUpper, obj.QuatOriginUpper);
-            qLower = obj.SerialLower.read();
             qLowerDiff = quatmultiply(qLower, obj.QuatOriginLower);
             obj.RobotInst.transform(qUpperDiff, qLowerDiff);
             obj.RobotInst.plotArms();
             obj.RobotInst.plotPoints();
             obj.RobotInst.plotCoordinates();
+            
+            
+            timeEnd = posixtime(datetime('now')) * 1000;
+            timeDiff = timeEnd - obj.timeStart;
+            %fprintf('%s - %s = %s\n', num2str(timeEnd), num2str(obj.timeStart), num2str(timeDiff));
+            fprintf(obj.fp, '[ %s ] [ %f, %f, %f, %f ] [ %f, %f, %f, %f ]\n',...
+            num2str(timeDiff),...
+            qUpper(1), qUpper(2), qUpper(3), qUpper(4),...
+            qLower(1), qLower(2), qLower(3), qLower(4));
+            
+            %fprintf(obj.fp, '[%f,%f,%f,%f] [%f,%f,%f] [%f,%f,%f,%f] [%f,%f,%f]\n',...
+            %qUpper(1), qUpper(2), qUpper(3), qUpper(4),...
+            %obj.RobotInst.p1(1), obj.RobotInst.p1(2), obj.RobotInst.p1(3),...
+            %qLower(1), qLower(2), qLower(3), qLower(4),...
+            %obj.RobotInst.p2(1), obj.RobotInst.p2(2), obj.RobotInst.p2(3));
         end
         
         function TimerEvent(obj, src, event)
@@ -107,12 +133,12 @@ classdef MainFigure < handle
         
         function delete(obj)
             stop(obj.UpdateTimer);
+            fclose(obj.fp);
             delete(obj.StartDelayTimer);
             delete(obj.UpdateTimer);
             delete(obj.Figure);
             delete(obj.RobotInst);
-            delete(obj.SerialUpper);
-            delete(obj.SerialLower);
+            delete(obj.Serial);
         end
     end
     
