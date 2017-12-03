@@ -17,12 +17,12 @@
 \usepackage{ngerman,palatino,setspace}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
-\usepackage[left=15mm,
-            right=15mm,
+\usepackage[left=25mm,
+            right=25mm,
             top=25mm,
             bottom=25mm]{geometry}
 \usepackage{graphicx}
-\usepackage[figuresleft]{rotating}
+\usepackage[figuresright]{rotating}
 \usepackage{scrpage2}
 \usepackage{listings}
 \usepackage[usenames,dvipsnames,svgnames]{xcolor}
@@ -49,28 +49,16 @@
 %-------------------------------------------------------------------------------
 % Dokument
 \begin{document}
-	~
-	
-	\vspace{0.1cm}
-	
-	\begin{center}
+	\begin{sidewaysfigure}
+		\centering
 		\fbox{
 			\includegraphics[height=20cm,trim={5cm 1cm 22cm 1cm},clip]{fig.eps}
 		}
-	\end{center}
-
-	\vfill
-
-	\newpage
-	
-	~
-	
-	\vspace{0.1cm}
-	\begin{center}
+	\end{sidewaysfigure}
+	\begin{sidewaysfigure}
+		\centering
 		\fbox{
-			\centering
-			\includegraphics[height=20cm,trim={23.5cm 1cm 3.5cm 1cm},clip]{fig.eps}
+			\includegraphics[height=20cm,trim={23cm 1cm 3cm 1cm},clip]{fig.eps}
 		}
-	\end{center}
-
+	\end{sidewaysfigure}
 \end{document}
