@@ -1,0 +1,51 @@
+
+
+%-------------------------------------------------------------------------------
+% Dokumenten Klasse
+\documentclass[
+	final,
+	a4paper,
+	oneside,
+	parskip=full,
+	headings=standardclasses,
+	headings=big,
+	pointednumbers
+]{scrartcl}
+
+%-------------------------------------------------------------------------------
+% Packete nutzen
+\usepackage{ngerman,palatino,setspace}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[left=5mm,right=5mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{graphicx}
+\usepackage{scrpage2}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{caption}
+
+%-------------------------------------------------------------------------------
+% Kopf- und Fusszeile
+
+\pagestyle{scrheadings}
+\clearscrheadfoot
+
+%-------------------------------------------------------------------------------
+%
+\title{Projekt 1: Implizite Euler und Trapezmethode}
+
+%-------------------------------------------------------------------------------
+% Dokumenten Einstellungen
+
+%-------------------------------------------------------------------------------
+% Dokument
+\begin{document}
+	\KOMAoptions{paper=landscape,pagesize}
+	\begin{figure}[htbp]
+		\hspace{-50pt}
+		\includegraphics[width=1.6\textwidth]{fig.eps}
+	\end{figure}
+		
+\end{document}
