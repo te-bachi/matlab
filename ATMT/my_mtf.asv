@@ -1,0 +1,20 @@
+
+
+%%
+clear all;
+close all;
+clc;
+
+
+%%
+A = importdata('Cstep.txt');
+t = A(:,1);
+x = A(:,2);
+
+figure;
+plot(t, x);
+
+y =  diff(x)];
+figure;
+plot(t, y);
+
