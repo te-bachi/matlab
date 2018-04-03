@@ -1,37 +1,22 @@
 
+function [t2, y2] = my_mtf(A)
+    t = A(:,1)';
+    x = A(:,2)';
 
-%%
-clear all;
-close all;
-clc;
+    figure;
+    subplot(3, 1, 1);
+    my_win(t, x)
 
-q = [1, 2, 3];
-w = [7, 8];
-p = [q, w];
+    y = [0, diff(x)];
+    subplot(3, 1, 2);
+    my_win(t, y);
 
-%%
-A = importdata('Cstep_fine.txt');
-t = A(:,1)';
-x = A(:,2)';
+    s     = sum(y);
+    y_fft = abs(fft(y)) / s;
+    subplot(3, 1, 3);
+    my_win(t, y_fft);
 
-figure;
-plot(t, x);
-
-y = [0, diff(x)];
-figure;
-plot(t, y);
-
-s     = sum(y);
-%y_fft = fftshift(abs(fft(y))) / s;§
-y_fft = abs(fft(y)) / s;
-figure;
-plot(t, y_fft);
-
-N     = length(y_fft);
-z_fft = y_fft(1:round(N/2));
-t2    = t(1:round(N/2));
-figure;
-plot(t2, z_fft);    
-grid on;
-grid minor;
-
+    N     = length(y_fft);
+    y2    = y_fft(1:round(N/2));
+    t2    = t(1:round(N/2));
+end
